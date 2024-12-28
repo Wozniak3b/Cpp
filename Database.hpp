@@ -1,32 +1,29 @@
-#include <vector>
-#include <map>
 #include <string>
 #include <fstream>
-#include "Users.hpp"
-#include "Debts.hpp"
+#include <nlohmann/json.hpp>
 
-using std::vector, std::string, std::map;
+using nlohmann::json, std::string, std::ofstream, std::ifstream;
 
 class Database {
-private:
-    vector<User> users;
-    map<int, vector<Debts>> userDebts;
-
 public:
-    void addUser(const string& user) {
-        users.push_back(user);
+    virtual ~Database(){};
+
+    virtual json toJson() const = 0;
+    virtual void fromJson(const json& j) = 0;
+
+    void saveToFile(const string& fileName){
+        ofstream file(fileName);
+        file<<toJson().dump(4);
+        file.close();
     }
 
-    void removeUser(const string& user) {
-        auto it = std::find(users.begin(), users.end(), user);
-        if (it != users.end()) {
-            int index = std::distance(users.begin(), it);
-            users.erase(it);
-            userDebts.erase(index);
+    void loadFromFile(const string& fileName){
+        ifstream file(fileName);
+        if(file.is_open()){
+            json j;
+            file>>j;
+            fromJson(j);
+            file.close();
         }
-    }
-
-    void addDebt(int userId, const Debts& debt) {
-        userDebts[userId].push_back(debt);
     }
 };

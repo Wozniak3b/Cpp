@@ -4,8 +4,8 @@ using std::string;
 
 class User: public Database {
 private:
-    string username;
     int id;
+    string username;
     string secretKey;
 
 public:
