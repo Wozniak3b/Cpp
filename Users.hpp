@@ -37,6 +37,6 @@ public:
         std::getline(ss, idStr, ',');
         std::getline(ss, username, ',');
         std::getline(ss, secretKey, ',');
-        return User(std::stoi(idStr), name, secretKey);
+        return User(std::stoi(idStr), username, secretKey);
     }
 };

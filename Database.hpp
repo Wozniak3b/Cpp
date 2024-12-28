@@ -27,7 +27,7 @@ public:
 
     void addDebt(int userId, const string& description, float amount){
         if(users.find(userId) == users.end()){
-            cout<<"User with ID: "<<id<<
+            cout<<"User with ID: "<<userId<<
             " dont exist"<<endl;
             return;
         }
@@ -36,7 +36,7 @@ public:
 
     void displayUsers() const {
         for (const auto& [id, user] : users) {
-            cout<<"ID: "<<id<<", Name: "<< user.getName()
+            cout<<"ID: "<<id<<", Name: "<< user.getUsername()
             <<", SecretKey: "<<user.getSecretKey()<<endl;
         }
     }
