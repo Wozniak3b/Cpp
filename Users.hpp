@@ -2,7 +2,7 @@
 using std::string;
 
 
-class Users{
+class User{
 private:
     string username;
     int id;
@@ -22,5 +22,19 @@ public:
 
     string getSecretKey() const {
         return secretKey;
+    }
+    
+    //Change to text and read from text to values
+    string serialize() const {
+        return std::to_string(id) + "," + username + "," + secretKey;
+    }
+
+    static User deserialize(const string& data) {
+        std::istringstream ss(data);
+        std::string idStr, username, secretKey;
+        std::getline(ss, idStr, ',');
+        std::getline(ss, username, ',');
+        std::getline(ss, secretKey, ',');
+        return User(std::stoi(idStr), name, secretKey);
     }
 };

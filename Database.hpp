@@ -6,17 +6,43 @@
 #include "Users.hpp"
 #include "Debts.hpp"
 
-using std::string, std::ofstream, std::ifstream, std::map, std::vector;
+using std::string, std::ofstream, std::ifstream, std::map,
+std::vector, std::cout;
 
 class Database {
 private:
-    map
+    map<int, User> users;
+    map<int, vector<Debt>> debts;
     
 public:
-    virtual ~Database(){};
+    void addUser(int id, const string& username, const string& secretKey){
+        if(users.find(id) != users.end()){
+            cout<<"User with ID: "<<id<<" and name: "<<username<<
+            " already exist"<<endl;
+            return -1;
+        }
+        users[id]=User(id,username,secretKey);
+    }
 
-    virtual json toJson() const = 0;
-    virtual void fromJson(const json& j) = 0;
+    void addDebt(int userId, const string& description, float amount){
+        if(users.find(userId) == users.end()){
+            cout<<"User with ID: "<<id<<" and name: "<<username<<
+            " dont exist"<<endl;
+            return -1;
+        }
+        debts[userId].push_back(Debt(description,amount));
+    }
+
+    void displayDebts(int userId) const{
+        if(debts.find(userId) == debts.end()){
+            cout<<"No debts for user with ID: "<<userId<<endl;
+            return -1;
+        }
+        for(const auto& debt: debts.at(userId)){
+            cout<<" - Debt: "<<debt.getDescription()
+            <<", Amount: "<<debt.getAmount()<<endl;
+        }
+    }
 
     void saveToFile(const string& fileName){
         ofstream file(fileName);

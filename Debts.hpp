@@ -1,12 +1,10 @@
 #include <string>
 using std::string;
 
-class Debts{
+class Debt{
 private:
     float amount;
     string description;
-    bool isPaid;
-
 public:
     Debt(float amt, const std::string& desc, bool paid)
         : amount(amt), description(desc), isPaid(paid) {}
@@ -19,11 +17,15 @@ public:
         return description;
     }
 
-    bool getIsPaid() const {
-        return isPaid;
+    string serialize() const {
+        return description + "," + std::to_string(amount);
     }
 
-    void markAsPaid() {
-        isPaid = true;
+    static Debt deserialize(const string& data) {
+        std::istringstream ss(data);
+        std::string description, amountStr;
+        std::getline(ss, description, ',');
+        std::getline(ss, amountStr, ',');
+        return Debt(description, std::stod(amountStr));
     }
-};
+}
