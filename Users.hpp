@@ -9,6 +9,8 @@ private:
     string secretKey;
 
 public:
+    User(){};
+
     User(int id, const string& username, const string& secretKey)
         : username(username), id(id), secretKey(secretKey) {}
 
