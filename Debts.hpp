@@ -3,11 +3,11 @@ using std::string;
 
 class Debt{
 private:
-    float amount;
     string description;
+    float amount;
 public:
-    Debt(float amt, const std::string& desc, bool paid)
-        : amount(amt), description(desc), isPaid(paid) {}
+    Debt(const string& desc, float amt)
+        : description(desc), amount(amt) {}
 
     float getAmount() const {
         return amount;
@@ -28,4 +28,4 @@ public:
         std::getline(ss, amountStr, ',');
         return Debt(description, std::stod(amountStr));
     }
-}
+};

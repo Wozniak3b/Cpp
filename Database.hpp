@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <map>
 #include <string>
 #include <fstream>
 #include <sstream>
@@ -19,24 +20,31 @@ public:
         if(users.find(id) != users.end()){
             cout<<"User with ID: "<<id<<" and name: "<<username<<
             " already exist"<<endl;
-            return -1;
+            return;
         }
         users[id]=User(id,username,secretKey);
     }
 
     void addDebt(int userId, const string& description, float amount){
         if(users.find(userId) == users.end()){
-            cout<<"User with ID: "<<id<<" and name: "<<username<<
+            cout<<"User with ID: "<<id<<
             " dont exist"<<endl;
-            return -1;
+            return;
         }
         debts[userId].push_back(Debt(description,amount));
+    }
+
+    void displayUsers() const {
+        for (const auto& [id, user] : users) {
+            cout<<"ID: "<<id<<", Name: "<< user.getName()
+            <<", SecretKey: "<<user.getSecretKey()<<endl;
+        }
     }
 
     void displayDebts(int userId) const{
         if(debts.find(userId) == debts.end()){
             cout<<"No debts for user with ID: "<<userId<<endl;
-            return -1;
+            return;
         }
         for(const auto& debt: debts.at(userId)){
             cout<<" - Debt: "<<debt.getDescription()
