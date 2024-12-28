@@ -41,6 +41,12 @@ public:
         }
     }
 
+    void displayUserInfo() const {
+        for (const auto& [id, user] : users) {
+            cout<<"ID: "<<id<<", Name: "<< user.getUsername()<<endl;
+        }
+    }
+
     void displayDebts(int userId) const{
         if(debts.find(userId) == debts.end()){
             cout<<"No debts for user with ID: "<<userId<<endl;
@@ -50,6 +56,10 @@ public:
             cout<<" - Debt: "<<debt.getDescription()
             <<", Amount: "<<debt.getAmount()<<endl;
         }
+    }
+
+    map<int, User> getUsers() const {
+        return users;
     }
 
     void saveToFile(const string& userFile, const string& debtFile){
