@@ -62,10 +62,17 @@ int main() {
                             db.displayUserInfo();
                             cout<<endl;
                             cout<<" Which user ID: ";
-                            if()
                             cin>>userId;
+
+                            //need to add check if is int
+                            if(userId>db.getUsers().size() || userId<0){
+                                cout<<"Invalid user ID"<<endl;
+                                break;
+                            }
+
                             cout << "Description: ";
-                            cin>>description;
+                            cin.ignore();
+                            std::getline(cin, description);
                             cout << "Amount: ";
                             cin >> amount;
                             db.addDebt(userId, description, amount);
@@ -77,7 +84,7 @@ int main() {
                         } else if (choice == 3) {
                             // Logout
                             loggedIn = false;
-                            return 0;
+                            break;
                         }
                     }
                 }
@@ -115,28 +122,5 @@ int main() {
     
 
     db.saveToFile("users.txt", "debts.txt");
-
-    /*db.addUser(1, "Jan", "secret123");
-    db.addUser(2, "Anna", "secret456");
-
-    db.addDebt(1, "Zakup laptopa", 3500.00);
-    db.addDebt(1, "Rachunek za prąd", 150.75);
-    db.addDebt(2, "Pożyczka od kolegi", 500.00);
-
-    cout<<"Użytkownicy:"<<endl;
-    db.displayUsers();
-
-    cout<<"\nDługi użytkownika Jan (ID: 1):"<<endl;
-    db.displayDebts(1);
-
-    db.saveToFile("users.txt", "debts.txt");
-
-    Database loadedDb;
-    loadedDb.loadFromFile("users.txt", "debts.txt");
-
-    cout<<"\nDane po odczycie z plików:"<<endl;
-    loadedDb.displayUsers();
-    loadedDb.displayDebts(1);*/
-
     return 0;
 }
