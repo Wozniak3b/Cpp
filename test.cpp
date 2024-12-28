@@ -11,12 +11,16 @@ void displayMenu(){
     cout<<"2. Register"<<endl;
     cout<<"3. Exit"<<endl;
     cout<<endl;
+    cout<<"Choose an option: ";
+    cout<<endl;
 }
 
 void displayMenuEmpty(){
     cout<<endl;
     cout<<"2. Register"<<endl;
     cout<<"3. Exit"<<endl;
+    cout<<endl;
+    cout<<"Choose an option: ";
     cout<<endl;
 }
 
@@ -25,8 +29,8 @@ void displayUserMenu(){
     cout<<"1. Add debt"<<endl;
     cout<<"2. Display my debts"<<endl;
     cout<<"3. Logout"<<endl;
-    line;
-    cout<<"Choose option: ";
+    cout<<endl;
+    cout<<"Choose an option: ";
     cout<<endl;
 }
 
@@ -78,8 +82,9 @@ int main() {
                             line;
                             cout<<"Here are all the users:"<<endl;
                             db.displayUserInfo();
+                            line;
                             cout<<endl;
-                            cout<<" Which user ID: ";
+                            cout<<"Which user ID: ";
                             cin>>userId;
 
                             //need to add check if is int
@@ -88,12 +93,12 @@ int main() {
                                 break;
                             }
 
-                            cout << "Description: ";
+                            cout<<"Description: ";
                             cin.ignore();
                             std::getline(cin, description);
-                            
-                            cout << "Amount: ";
-                            cin >> amount;
+
+                            cout<<"Amount: ";
+                            cin>>amount;
                             if(amount<0){
                                 cout<<"Amount can't be negative"<<endl;
                                 break;
