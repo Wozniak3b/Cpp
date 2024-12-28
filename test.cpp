@@ -13,27 +13,41 @@ void displayMenu(){
     cout<<endl;
 }
 
+void displayMenuEmpty(){
+    cout<<endl;
+    cout<<"2. Register"<<endl;
+    cout<<"3. Exit"<<endl;
+    cout<<endl;
+}
+
 void displayUserMenu(){
     cout<<endl;
     cout<<"1. Add debt"<<endl;
     cout<<"2. Display my debts"<<endl;
     cout<<"3. Logout"<<endl;
+    line;
     cout<<"Choose option: ";
     cout<<endl;
 }
 
 int main() {
     Database db;
-
+    bool files=true;
     if(fs::exists("users.txt") && fs::exists("debts.txt")){
         db.loadFromFile("users.txt", "debts.txt");
     } else {
         cout<<"Files not found. Starting with empty database"<<endl;
+        files=false;
     }
 
     int choice;
     while(true){
-        displayMenu();
+        if(!files){
+            displayMenuEmpty();
+            files=true;
+        } else {
+            displayMenu();
+        }
         cin>>choice;
 
         if(choice==1){
@@ -52,6 +66,10 @@ int main() {
                     while (loggedIn) {
                         displayUserMenu();
                         cin >> choice;
+                        if(db.getUsers().size()==1 && choice==1){
+                            cout<<"No other users to add debt to"<<endl;
+                            break;
+                        }
                         if (choice == 1) {
 
                             string description;
@@ -73,8 +91,13 @@ int main() {
                             cout << "Description: ";
                             cin.ignore();
                             std::getline(cin, description);
+                            
                             cout << "Amount: ";
                             cin >> amount;
+                            if(amount<0){
+                                cout<<"Amount can't be negative"<<endl;
+                                break;
+                            }
                             db.addDebt(userId, description, amount);
 
                         } else if (choice == 2) {
