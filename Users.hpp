@@ -2,10 +2,10 @@
 using std::string;
 
 
-class User: public Database {
+class Users{
 private:
-    int id;
     string username;
+    int id;
     string secretKey;
 
 public:

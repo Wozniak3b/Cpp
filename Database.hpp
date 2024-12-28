@@ -1,10 +1,17 @@
+#include <iostream>
+#include <vector>
 #include <string>
 #include <fstream>
-#include <nlohmann/json.hpp>
+#include <sstream>
+#include "Users.hpp"
+#include "Debts.hpp"
 
-using nlohmann::json, std::string, std::ofstream, std::ifstream;
+using std::string, std::ofstream, std::ifstream, std::map, std::vector;
 
 class Database {
+private:
+    map
+    
 public:
     virtual ~Database(){};
 

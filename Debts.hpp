@@ -1,7 +1,7 @@
 #include <string>
 using std::string;
 
-class Debt: public Database {
+class Debts{
 private:
     float amount;
     string description;
