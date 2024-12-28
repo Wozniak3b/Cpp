@@ -62,15 +62,17 @@ int main() {
                             db.displayUserInfo();
                             cout<<endl;
                             cout<<" Which user ID: ";
+                            if()
                             cin>>userId;
                             cout << "Description: ";
-                            std::getline(cin, description);
+                            cin>>description;
                             cout << "Amount: ";
                             cin >> amount;
                             db.addDebt(userId, description, amount);
 
                         } else if (choice == 2) {
                             // Display Debts
+                            line;
                             db.displayDebts(currentUserId);
                         } else if (choice == 3) {
                             // Logout
@@ -80,8 +82,38 @@ int main() {
                     }
                 }
             }
+            if (!loggedIn) {
+                line;
+                cout << "Invalid username or password" << endl;
+            }
+        }
+        else if(choice==2){
+            int newUserId=0;
+            for (const auto& [id, user] : db.getUsers()) {
+                if(id>newUserId){
+                    newUserId=id;
+                }
+            }
+            newUserId++;
+
+            line;
+            string username, secretKey;
+            cout<<"Username: ";
+            cin>>username;
+            cout<<"Password: ";
+            cin>>secretKey;
+            db.addUser(newUserId, username, secretKey);
+            cout << "User registered with ID: " << newUserId << endl;
+        }
+        else if (choice == 3) {
+            break;
+        }
+        else {
+            cout << "Invalid choice" << endl;
         }
     }
+    
+
     db.saveToFile("users.txt", "debts.txt");
 
     /*db.addUser(1, "Jan", "secret123");
