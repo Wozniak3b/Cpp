@@ -33,13 +33,13 @@ public:
         users[id]=User(id,username,secretKey);
     }
 
-    void addDebt(int userId, const string& description, float amount){
+    void addDebt(int userId, const string& description, float amount, const string& receiver){
         if(users.find(userId) == users.end()){
             cout<<"User with ID: "<<userId<<
             " dont exist"<<endl;
             return;
         }
-        debts[userId].push_back(Debt(description,amount));
+        debts[userId].push_back(Debt(description,amount, receiver));
     }
 
     void displayUsers() const {
@@ -63,7 +63,7 @@ public:
         for(const auto& debt: debts.at(userId)){
             cout<<" - Title: "<<debt.getDescription()
             <<", Amount: "<<debt.getAmount()<<
-            " zł"<<endl;
+            " zł"<<", Receiver: "<<debt.getReceiver()<<endl;
         }
     }
 
