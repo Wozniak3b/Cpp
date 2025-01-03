@@ -14,12 +14,20 @@ class Database {
 private:
     map<int, User> users;
     map<int, vector<Debt>> debts;
+
+    bool usernameExists(const string& username) const {
+        for (const auto& [id, user] : users) {
+            if (user.getUsername() == username) {
+                return true;
+            }
+        }
+        return false;
+    }
     
 public:
     void addUser(int id, const string& username, const string& secretKey){
-        if(users.find(id) != users.end()){
-            cout<<"User with ID: "<<id<<" and name: "<<username<<
-            " already exist"<<endl;
+        if (usernameExists(username)) {
+            cout << "User with username: " << username << " already exists" << endl;
             return;
         }
         users[id]=User(id,username,secretKey);

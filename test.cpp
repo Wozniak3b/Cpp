@@ -137,8 +137,13 @@ int main() {
             cin>>username;
             cout<<"Password: ";
             cin>>secretKey;
+
+            int userSize=db.getUsers().size();
             db.addUser(newUserId, username, secretKey);
-            cout << "User registered with ID: " << newUserId << endl;
+
+            if(db.getUsers().size()>userSize){
+                cout << "User registered with ID: " << newUserId << endl;
+            }
         }
         else if (choice == 3) {
             break;
