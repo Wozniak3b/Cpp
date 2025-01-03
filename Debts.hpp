@@ -1,4 +1,5 @@
 #include <string>
+#include <cmath>
 using std::string;
 
 class Debt{
@@ -7,7 +8,7 @@ private:
     float amount;
 public:
     Debt(const string& desc, float amt)
-        : description(desc), amount(amt) {}
+        : description(desc), amount(std::round(amt*100.0)/100.0) {}
 
     float getAmount() const {
         return amount;

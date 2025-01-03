@@ -87,7 +87,13 @@ int main() {
                             cout<<"Which user ID: ";
                             cin>>userId;
 
-                            //need to add check if is int
+                            if(cin.fail()) {
+                                cin.clear();
+                                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                cout<<"Invalid input"<<endl;
+                                break;
+                            }
+
                             if(userId>db.getUsers().size() || userId<0){
                                 cout<<"Invalid user ID"<<endl;
                                 break;
@@ -111,7 +117,7 @@ int main() {
                             db.displayDebts(currentUserId);
                         } else if (choice == 3) {
                             // Logout
-                            loggedIn = false;
+                            db.saveToFile("users.txt", "debts.txt");
                             break;
                         }
                     }
@@ -144,6 +150,7 @@ int main() {
             if(db.getUsers().size()>userSize){
                 cout << "User registered with ID: " << newUserId << endl;
             }
+            db.saveToFile("users.txt", "debts.txt");
         }
         else if (choice == 3) {
             break;
