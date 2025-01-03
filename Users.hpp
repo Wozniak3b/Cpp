@@ -4,9 +4,9 @@ using std::string;
 
 class User{
 private:
-    int id;
-    string username;
-    string secretKey;
+    int m_id;
+    string m_username;
+    string m_secretKey;
 
     static string xorEncryptDecrypt(const string& input, char key) {
         string output = input;
@@ -20,24 +20,24 @@ public:
     User(){};
 
     User(int id, const string& username, const string& secretKey)
-        : username(username), id(id), secretKey(secretKey) {}
+        : m_username(username), m_id(id), m_secretKey(secretKey) {}
 
     string getUsername() const {
-        return username;
+        return m_username;
     }
 
     int getId() const {
-        return id;
+        return m_id;
     }
 
     string getSecretKey() const {
-        return secretKey;
+        return m_secretKey;
     }
     
     //Change to text and read from text to values
     string serialize() const {
-        string encryptedKey = xorEncryptDecrypt(secretKey, 'K');
-        return std::to_string(id) + "," + username + "," + encryptedKey;
+        string encryptedKey = xorEncryptDecrypt(m_secretKey, 'K');
+        return std::to_string(m_id) + "," + m_username + "," + encryptedKey;
     }
 
     static User deserialize(const string& data) {

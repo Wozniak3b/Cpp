@@ -109,6 +109,7 @@ int main() {
                                 cout<<"Amount can't be negative"<<endl;
                                 break;
                             }
+                            cout<<"Debt added successfully"<<endl;
                             db.addDebt(userId, description, amount,db.getUsers().at(currentUserId).getUsername());
 
                         } else if (choice == 2) {

@@ -4,27 +4,27 @@ using std::string;
 
 class Debt{
 private:
-    string description;
-    float amount;
-    string receiver;
+    string m_description;
+    float m_amount;
+    string m_receiver;
 public:
     Debt(const string& desc, float amt, const string& receiver)
-        : description(desc), amount(std::round(amt*100.0)/100.0), receiver(receiver) {}
+        : m_description(desc), m_amount(std::round(amt*100.0)/100.0), m_receiver(receiver) {}
 
     float getAmount() const {
-        return amount;
+        return m_amount;
     }
 
     string getDescription() const {
-        return description;
+        return m_description;
     }
 
     string getReceiver() const {
-        return receiver;
+        return m_receiver;
     }
 
     string serialize() const {
-        return description + "," + std::to_string(amount)+ "," + receiver;
+        return m_description + "," + std::to_string(m_amount)+ "," + m_receiver;
     }
 
     static Debt deserialize(const string& data) {
