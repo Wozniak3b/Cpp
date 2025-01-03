@@ -61,8 +61,9 @@ public:
             return;
         }
         for(const auto& debt: debts.at(userId)){
-            cout<<" - Debt: "<<debt.getDescription()
-            <<", Amount: "<<debt.getAmount()<<endl;
+            cout<<" - Title: "<<debt.getDescription()
+            <<", Amount: "<<debt.getAmount()<<
+            " zł"<<endl;
         }
     }
 
