@@ -14,6 +14,7 @@ class Database {
 private:
     map<int, User> users;
     map<int, vector<Debt>> debts;
+    int nextDebtId=1;
 
     bool usernameExists(const string& username) const {
         for (const auto& [id, user] : users) {
@@ -39,7 +40,22 @@ public:
             " dont exist"<<endl;
             return;
         }
-        debts[userId].push_back(Debt(description,amount, receiver));
+        debts[userId].push_back(Debt(nextDebtId, description,amount, receiver));
+    }
+
+    void markDebtAsPaid(int userId, int debtId) {
+        if (debts.find(userId) == debts.end()) {
+            cout << "No debts for user with ID: " << userId << endl;
+            return;
+        }
+        for (auto& debt : debts[userId]) {
+            if (debt.getId() == debtId) {
+                debt.markAsPaid();
+                cout << "Debt with ID: " << debtId << " marked as paid." << endl;
+                return;
+            }
+        }
+        cout << "Debt with ID: " << debtId << " not found." << endl;
     }
 
     void displayUsers() const {
@@ -61,9 +77,10 @@ public:
             return;
         }
         for(const auto& debt: debts.at(userId)){
-            cout<<" - Title: "<<debt.getDescription()
+            cout<<" -ID: "<<debt.getId()<<", Title: "<<debt.getDescription()
             <<", Amount: "<<debt.getAmount()<<
-            " zł"<<", Receiver: "<<debt.getReceiver()<<endl;
+            " zł"<<", Receiver: "<<debt.getReceiver()
+            <<", Paid: "<<(debt.isPaid() ? "Yes" : "No")<<endl;
         }
     }
 
@@ -111,7 +128,11 @@ public:
             std::getline(ss, debtData);
 
             int userId = std::stoi(userIdStr);
-            debts[userId].push_back(Debt::deserialize(debtData));
+            Debt debt = Debt::deserialize(debtData);
+            debts[userId].push_back(debt);
+            if (debt.getId() >= nextDebtId) {
+                nextDebtId = debt.getId() + 1;
+            }
         }
 
         userIn.close();

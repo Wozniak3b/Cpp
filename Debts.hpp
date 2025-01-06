@@ -31,16 +31,16 @@ public:
     }
 
     bool isPaid() const {
-        return m_isPaid;
+        return m_paid;
     }
 
     void markAsPaid() {
-        m_isPaid = true;
+        m_paid = true;
     }
 
     string serialize() const {
         return std::to_string(m_id) + "," + m_description + "," 
-        + std::to_string(m_amount)+ "," + m_receiver+ "," + (m_isPaid ? "1" : "0");
+        + std::to_string(m_amount)+ "," + m_receiver+ "," + (m_paid ? "1" : "0");
     }
 
     static Debt deserialize(const string& data) {
@@ -51,6 +51,7 @@ public:
         std::getline(ss, amountStr, ',');
         std::getline(ss, receiver, ',');
         std::getline(ss, isPaidStr, ',');
-        return Debt(std::stoi(idStr), description, std::stod(amountStr), receiver, isPaidStr == "1");
+        return Debt(std::stoi(idStr), description, 
+        std::stod(amountStr), receiver, isPaidStr == "1");
     }
 };
