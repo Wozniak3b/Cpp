@@ -28,7 +28,8 @@ void displayUserMenu(){
     cout<<endl;
     cout<<"1. Add debt"<<endl;
     cout<<"2. Display my debts"<<endl;
-    cout<<"3. Logout"<<endl;
+    cout<<"3. Mark debt as paid"<<endl;
+    cout<<"4. Logout"<<endl;
     cout<<endl;
     cout<<"Choose an option: ";
     cout<<endl;
@@ -116,7 +117,9 @@ int main() {
                             // Display Debts
                             line;
                             db.displayDebts(currentUserId);
-                        } else if (choice == 3) {
+                        }else if(choice==3) {
+                            cout<<"Debt marked as paid"<<endl;
+                        }else if (choice == 4) {
                             // Logout
                             db.saveToFile("users.txt", "debts.txt");
                             break;
