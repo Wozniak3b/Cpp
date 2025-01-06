@@ -118,7 +118,11 @@ int main() {
                             line;
                             db.displayDebts(currentUserId);
                         }else if(choice==3) {
-                            cout<<"Debt marked as paid"<<endl;
+                            int debtId;
+                            line;
+                            cout<<"Enter debt ID to mark as paid: ";
+                            cin>>debtId;
+                            db.markDebtAsPaid(currentUserId, debtId);
                         }else if (choice == 4) {
                             // Logout
                             db.saveToFile("users.txt", "debts.txt");

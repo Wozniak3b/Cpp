@@ -10,6 +10,8 @@ private:
     string m_receiver;
     bool m_paid;
 public:
+    Debt() : id(0), description(""), amount(0.0), receiver(""), paid(false) {}
+
     Debt(int id, const string& desc, float amt, const string& receiver, bool paid=false)
         : m_id(id), m_description(desc), m_amount(std::round(amt*100.0)/100.0)
         , m_receiver(receiver), m_paid(paid) {}

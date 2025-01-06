@@ -17,7 +17,7 @@ private:
     }
 
 public:
-    User(){};
+    User(): id(0), username(""), secretKey("") {};
 
     User(int id, const string& username, const string& secretKey)
         : m_username(username), m_id(id), m_secretKey(secretKey) {}
