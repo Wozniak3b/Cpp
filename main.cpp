@@ -36,7 +36,7 @@ void displayUserMenu(){
 }
 
 int main() {
-    Database db;
+    jw::Database db;
     bool files=true;
     if(fs::exists("users.txt") && fs::exists("debts.txt")){
         db.loadFromFile("users.txt", "debts.txt");

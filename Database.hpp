@@ -10,6 +10,8 @@
 using std::string, std::ofstream, std::ifstream, std::map,
 std::vector, std::cout, std::endl;
 
+namespace jw {
+
 class Database {
 private:
     map<int, User> users;
@@ -139,3 +141,5 @@ public:
         debtIn.close();
     }
 };
+
+}

@@ -2,6 +2,8 @@
 #include <cmath>
 using std::string;
 
+namespace jw{
+
 class Debt{
 private:
     int m_id;
@@ -10,7 +12,7 @@ private:
     string m_receiver;
     bool m_paid;
 public:
-    Debt() : id(0), description(""), amount(0.0), receiver(""), paid(false) {}
+    Debt() : m_id(0), m_description(""), m_amount(0.0), m_receiver(""), m_paid(false) {}
 
     Debt(int id, const string& desc, float amt, const string& receiver, bool paid=false)
         : m_id(id), m_description(desc), m_amount(std::round(amt*100.0)/100.0)
@@ -57,3 +59,5 @@ public:
         std::stod(amountStr), receiver, isPaidStr == "1");
     }
 };
+
+}

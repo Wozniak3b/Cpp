@@ -1,6 +1,7 @@
 #include <string>
 using std::string;
 
+namespace jw{
 
 class User{
 private:
@@ -17,7 +18,7 @@ private:
     }
 
 public:
-    User(): id(0), username(""), secretKey("") {};
+    User(): m_id(0), m_username(""), m_secretKey("") {};
 
     User(int id, const string& username, const string& secretKey)
         : m_username(username), m_id(id), m_secretKey(secretKey) {}
@@ -53,3 +54,5 @@ public:
         return User(id, username, secretKey);
     }
 };
+
+}
