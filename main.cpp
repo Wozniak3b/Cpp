@@ -56,6 +56,7 @@ int main() {
         cin>>choice;
 
         if(choice==1){
+            //Login
             line;
             string username, secretKey;
             cout<<"Username: ";
@@ -138,6 +139,7 @@ int main() {
             }
         }
         else if(choice==2){
+            //Register
             int newUserId=0;
             for (const auto& [id, user] : db.getUsers()) {
                 if(id>newUserId){
@@ -162,6 +164,7 @@ int main() {
             db.saveToFile("users.txt", "debts.txt");
         }
         else if (choice == 3) {
+            //Exit
             break;
         }
         else {
