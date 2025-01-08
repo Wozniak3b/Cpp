@@ -76,7 +76,7 @@ int main() {
                             break;
                         }
                         if (choice == 1) {
-
+                            // Add debt
                             string description;
                             float amount;
                             int userId=0;
@@ -118,6 +118,7 @@ int main() {
                             line;
                             db.displayDebts(currentUserId);
                         }else if(choice==3) {
+                            // Pay debt
                             int debtId;
                             line;
                             cout<<"Enter debt ID to mark as paid: ";
